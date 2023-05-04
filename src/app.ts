@@ -1,8 +1,24 @@
-import Fastify from 'fastify';
+import Fastify, { FastifyRequest, FastifyReply } from 'fastify';
+import fjwt from 'fastify-jwt';
 import userRoutes from './modules/user/user.route';
 import { userSchemas } from './modules/user/user.schema';
 
-const server = Fastify();
+export const server = Fastify();
+
+server.register(fjwt, {
+  secret: 'fsagjdghnftweqirj1243tnmrvbn313',
+});
+
+server.decorate(
+  'authenticate',
+  async (request: FastifyRequest, reply: FastifyReply) => {
+    try {
+      await request.jwtVerify();
+    } catch (e) {
+      return reply.send(e);
+    }
+  }
+);
 
 server.get('/healthcheck', async (req, res) => {
   return { status: 'OK' };
