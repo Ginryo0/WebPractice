@@ -1,0 +1,6 @@
+{
+  "sales": {
+    "s1": { "username": "Konga", "amount": "$100" },
+    "s2": { "username": "Bonga", "amount": "$150" }
+  }
+}
