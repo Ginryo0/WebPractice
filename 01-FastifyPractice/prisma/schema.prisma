@@ -17,15 +17,16 @@ model User {
   password String
   salt String
   products Product[]
+  address String @default("address")
 }
 
 model Product {
   id Int @id @default(autoincrement())
-  createAt DateTime @default(now())
+  createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   title String @db.VarChar(255)
   content String?
   price Float
-  owner User @relation(fields: [ownerId], references: [id])
   ownerId Int
+  owner User @relation(fields: [ownerId], references: [id])
 }
