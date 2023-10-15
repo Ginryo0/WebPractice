@@ -41,7 +41,7 @@ async function handler(req, res) {
 
   const hashedPassword = await hashPassword(newPw);
 
-  const res = await usersCollection.updateOne(
+  const data = await usersCollection.updateOne(
     { email },
     { $set: { password: hashedPassword } }
   );
